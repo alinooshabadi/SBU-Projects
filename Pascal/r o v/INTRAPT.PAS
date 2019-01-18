@@ -1,0 +1,939 @@
+program REQUIREMENT_OF_QUICKNESS;
+
+uses crt,dos;
+const
+delay_rate=0;
+repeat_rate=1;
+
+var
+bg          :array[1..25,1..80] of word absolute $b800:0000;
+HELP,my_help:array[1..25,1..80] of integer;
+rafigh,mycar:array [1..4,1..5]  of word ;
+harif,harif2:array [1..3,1..5]  of word;
+kamion      :array [1..7,1..7]  of word;
+jadval1,jadval2,line1,line2    :array [1..25] of word;
+komak,h,harekat,avazi,a,b,c,d,e,f,i,j,rang,jadcheck,tamam   :integer;
+damage,ia4,ja4,ki,kj,ci1,cj1,ci2,cj2,ei1,ej1,ei2,ej2,ri,rj  :integer;
+had,speed,slide,dandeh,rahnamachap,rahnamarast,sorat        :integer;
+k,y_n:char;
+reg:registers;
+{-----------------------------PROCEDURES-------------------------------------}
+{++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++}
+procedure my_makan(c,d:integer);
+begin
+   for a:=1 to 4 do
+    for b:=1 to 5 do
+   bg[a+c-1,b+d-1]:=mycar[a,b];
+end;
+
+procedure makanrafigh(c,d:integer);
+begin
+   for a:=1 to 4 do
+    for b:=1 to 5 do
+   bg[a+c-1,b+d-1]:=rafigh[a,b];
+end;
+
+procedure makan(c,d:integer);
+  begin
+   for a:=1 to 3 do
+    for b:=1 to 5do
+   bg[a+c-1,b+d-1]:=harif[a,b];
+   for a:=1 to 3 do
+    for b:=1 to 5 do
+   HELP[a+c-1,b+d-1]:=1;
+
+   end;
+
+
+procedure makan2(c,d:integer);
+  begin
+   for a:=1 to 3 do
+    for b:=1 to 5do
+   bg[a+c-1,b+d-1]:=harif2[a,b];
+
+   end;
+
+procedure makanK(c,d:integer);
+  begin
+   for a:=1 to 7 do
+    for b:=1 to 7 do
+   bg[a+c-1,b+d-1]:=KAMION[a,b];
+   end;
+
+procedure helpp(c,d:integer);
+begin
+for a:=1 to 3 do
+ for b:=1 to 5 do
+   HELP[a+c-1,b+d-1]:=1;
+   end;
+
+
+procedure my_helpp(c,d:integer);
+begin
+for a:=20 to 25 do
+  for b:=1 to 65 do
+   my_help[a,b]:=0;
+ for a:=1 to 4 do
+  for b:=1 to 5 do
+   my_HELP[a+c-1,b+d-1]:=1;
+   { my_help[a+c-1,b+d-1]:=0;
+    my_help[a+c-1,b+d+3]:=0;
+    my_help[a+c+2,b+d-1]:=0;
+    my_help[a+c+2,b+d+3]:=0;}
+    end;
+
+
+procedure matristo2;
+begin
+for a:=1 to 25 do
+ for b:=1 to 80 do
+ help[a,b]:=2;
+end;
+
+procedure cjadval1;
+ begin
+ for rang:=1 to 25 do
+ begin
+  bg[rang,18]:=jadval1[rang];
+  bg[rang,69]:=jadval1[rang];
+  bg[rang,44]:=line1[rang];
+  end;
+  end;
+
+
+
+procedure cjadval2;
+ begin
+ for rang:=1 to 25 do
+ begin
+  bg[rang,18]:=jadval2[rang];
+  bg[rang,69]:=jadval2[rang];
+  bg[rang,44]:=line2[rang];
+  end;
+  end;
+
+
+
+{=================================CREDITS===================================}
+{===========================================================================}
+
+
+BEGIN
+
+randomize;
+reg.ah:=3;
+reg.bl:=5;
+reg.bh:=delay_rate;
+reg.bl:=repeat_rate;
+intr($16,reg);
+
+
+
+clrscr;
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=219+7*256;
+textcolor(red);
+textbackground(WHITE);
+gotoxy(6,5)  ;writeln('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
+gotoxy(6,6)  ;writeln(' °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
+gotoxy(6,8)  ;writeln('   °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° ');
+gotoxy(6,9)  ;writeln('    °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°     ');
+gotoxy(6,11) ;writeln('     °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
+gotoxy(6,12) ;writeln('      °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° ');
+gotoxy(6,14) ;writeln('   ');
+gotoxy(6,15) ;writeln('  ');
+
+textcolor(black);
+gotoxy(30,21);writeln('Immortal Software present');
+textcolor(red);
+gotoxy(22,24);writeln('Death in,death in it`s most hedeous form...');
+
+readkey;
+
+
+
+
+
+{=================================MENU1=====================================}
+{===========================================================================}
+
+
+
+
+
+clrscr;
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=0;
+textbackground(black);
+textcolor(LightBLUE);
+
+gotoxy(2,4) ;writeln('OOOOO   000000  OOOOO   00000 OOOOO   000000 OO     O 000000 OO   O 000000000   ');
+gotoxy(2,5) ;writeln('OO   O  00     OO    O   00   OO   O  00     OOOO OOO 00     OOO  O    00             ');
+gotoxy(2,6) ;writeln('OOOO    0000   OO    O   00   OOOO    0000   OO  O  O 0000   OO O O    00       ');
+gotoxy(2,7) ;writeln('OO  O   00     OO   OO   00   OO  O   00     OO     O 00     OO  OO    00            ');
+gotoxy(2,8) ;writeln('OO   OO 000000  OOOO  O 00000 OO   OO 000000 OO     O 000000 OO   O    00   ');
+gotoxy(10,10);writeln('                         OOOO OOOO                          ');
+gotoxy(10,11);writeln('                         O  O O                           ');
+gotoxy(10,12);writeln('                         O  O OOO                    ');
+gotoxy(10,13);writeln('                         OOOO O               ');
+gotoxy(10,16);writeln('                    Q U I C K N E S S                                     ');
+gotoxy(10,15);writeln('                                                  ');
+gotoxy(10,17);writeln('                                         ');
+gotoxy(10,18);writeln('                                     ');
+gotoxy(10,19);writeln('                                      ');
+
+
+
+textcolor(white);
+{Gotoxy(30,16);writeln('REQUIREMENT OF QUICKNESS'); }
+{gotoxy(35,19);writeln('Press Enter');}
+gotoxy(22,2);writeln('I M M O R T A L   S O F T W A R E    TM.');
+gotoxy(33,22);writeln('PEUGEOT  UNLEASHED');
+gotoxy(20,25);writeln('2005 Immortal Software Inc. All rights reserved.');
+
+readkey;
+
+
+
+
+{===========================================================================}
+{====================================MENU2==================================}
+
+clrscr;
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=0;
+TEXTCOLOR(white);
+textbackground(black);
+gotoxy(33,8)  ;writeln('Single Player');
+gotoxy(35,10) ;writeln('Evolution');
+gotoxy(36,12) ;writeln('Options');
+gotoxy(36,14) ;writeln('Credits');
+gotoxy(37,16) ;writeln('EXIT');
+REAdkey;
+{=================================MAP=======================================}
+{===========================================================================}
+CLRSCR;
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=0;
+textbackground(black);
+gotoxy(36,6)  ;writeln('NORMANDIA');
+gotoxy(31,25)  ;writeln('L O A D I N G . . .');
+TEXTCOLOR(lightBLUE);
+gotoxy(10,13) ;writeln('  °°°°°°°°°°°°°°°       °°°°                    ');
+gotoxy(10,14) ;writeln('°°°°       °°°°°°°°°°°°°°°°°                             ');
+gotoxy(10,15) ;writeln(' °°        °°°°            °°°°°°°°°°°°                         ');
+gotoxy(10,16) ;writeln('°°°°        °°°°                     °°°              °°°°°°°°°°         ');
+gotoxy(10,17) ;writeln(' °°°          °°°°                    °°°             °°°              ');
+gotoxy(10,18) ;writeln('°°°°           °°°°                    °°°          °°° ');
+gotoxy(10,19);writeln('°°°           °°°°                     °°°°°°°°°°°°°°°        ');
+gotoxy(10,20);writeln(' °°°            °°°°°                    °°°   ');
+gotoxy(10,21);writeln('  °°°°             °°°°°°°°°°°°°°°°°°°°°°°°°°°°            ');
+
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+DELAY(32000);
+
+
+
+
+
+
+{===========================================================================}
+{===========================================================================}
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=219+7*256;
+
+ for i:=1 to 25 do
+  for j:=16 to 70 do
+   bg[i,j]:=0;
+
+
+  while j<26 do
+   begin
+    jadval1[J]:=178+15*256;
+    j:=j+2;
+   end;
+  j:=2;
+  while j<25 do
+   begin
+    jadval1[j]:=178+0;
+    j:=j+2;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    jadval2[J]:=178+0;
+    j:=j+2;
+   end;
+  j:=2;
+  while j<25 do
+   begin
+    jadval2[j]:=178+15*256;
+    j:=j+2;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    line1[J]:=176+0;
+    j:=j+1;
+    line1[j]:=176+0;
+    j:=j+3;
+   end;
+  j:=3;
+  while j<25 do
+   begin
+    line1[j]:=176+7*256;
+    j:=j+1;
+    line1[j]:=176+7*256;
+    j:=j+3;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    line2[J]:=176+7*256;
+    j:=j+1;
+    line2[j]:=176+7*256;
+    j:=j+3;
+   end;
+  j:=3;
+  while j<25 do
+   begin
+    line2[j]:=176+0;
+    j:=j+1;
+    line2[j]:=176+0;
+    j:=j+3;
+   end;
+
+ cJadval2;
+
+textcolor(red);
+textbackground(white);
+  gotoxy(1,20);writeln('ÉÍÍÍÍÍÍÍÍÍÍÍÍ»');
+  gotoxy(1,21);writeln('º            º');
+  gotoxy(1,22);writeln('º            º');
+  gotoxy(1,23);writeln('º            º');
+  gotoxy(1,24);writeln('ÈÍÍÍÍÍÍÍÍÍÍÍÍ¼');
+  gotoxy(2,21);writeln('0',' ',' km/h ');
+  gotoxy(2,23);writeln('Gear :','N');
+  gotoxy(2,22);writeln('Damage :','0');
+
+{---------------------------------MY CAR------------------------------------}
+for i:=2 to 3 do
+  for j:=2 to 4 do
+  mycar[i,j]:=219+20*256;
+  mycar[2,1]:=40+7*256;
+  mycar[3,1]:=40+7*256;
+  mycar[2,5]:=41+7*256;
+  mycar[3,5]:=41+7*256;
+  mycar[1,2]:=31+4*256;
+  mycar[1,4]:=31+4*256;
+  mycar[4,2]:=250+15*256;
+  mycar[4,4]:=250+15*256;
+{---------------------------------rafigh------------------------------------}
+for i:=2 to 3 do
+  for j:=2 to 4 do
+  rafigh[i,j]:=219+1*256;
+  rafigh[2,1]:=40+7*256;
+  rafigh[3,1]:=40+7*256;
+  rafigh[2,5]:=41+7*256;
+  rafigh[3,5]:=41+7*256;
+  rafigh[1,2]:=31+15*256;
+  rafigh[1,4]:=31+15*256;
+  rafigh[4,2]:=250+15*256;
+  rafigh[4,4]:=250+15*256;
+{-----------------------------------Harif-----------------------------------}
+for i:=1 to 2 do
+  for j:=2 to 4 do
+  harif[i,j]:=219+15*256;
+  harif[1,1]:=40+5*256;
+  harif[2,1]:=40+5*256;
+  harif[1,5]:=41+5*256;
+  harif[2,5]:=41+5*256;
+  harif[3,4]:=30+5*256;
+  harif[3,2]:=30+5*256;
+{-----------------------------------Harif2-----------------------------------}
+for i:=2 to 3 do
+  for j:=2 to 4 do
+  harif2[i,j]:=219+15*256;
+  harif2[2,1]:=40+5*256;
+  harif2[3,1]:=40+5*256;
+  harif2[2,5]:=41+5*256;
+  harif2[3,5]:=41+5*256;
+  harif2[1,4]:=31+5*256;
+  harif2[1,2]:=31+5*256;
+{---------------------------------------KAMION-------------------------------}
+ FOR i:=3 to 6 do
+  for j:=2 to 6 do
+  KAMION[i,j]:=178+118*256;
+FOR i:=1 to 2 do
+  for j:=2 to 6 do
+  KAMION[i,j]:=219+7*256;
+FOR i:=2 to 6 do
+  KAMION[3,I]:=176+118*256;
+  KAMION[1,4]:=219+0*256;
+  KAMION[1,2]:=9+7*256;
+  KAMION[1,6]:=9+7*256;
+  KAMION[1,3]:=9+7*256;
+  KAMION[1,5]:=9+7*256;
+  KAMION[2,3]:=1+112*256;
+  KAMION[2,5]:=2+112*256;
+  KAMION[2,1]:=40+7*256;
+  KAMION[5,1]:=40+7*256;
+  KAMION[6,1]:=40+7*256;
+  KAMION[3,1]:=40+7*256;
+  KAMION[2,7]:=41+7*256;
+  KAMION[5,7]:=41+7*256;
+  KAMION[6,7]:=41+7*256;
+  KAMION[3,7]:=41+7*256;
+  KAMION[7,6]:=232+136*256;
+  KAMION[7,2]:=232+136*256;
+
+
+
+
+
+{----------------------------------------------------------------------------}
+i:=21;
+j:=48;
+ri:=21;
+rj:=29;
+ci1:=-3;
+randomize;
+cj1:=random(15)+20;
+ci2:=-15;
+cj2:=random(15)+20;
+my_makan(i,j);
+my_helpp(i,j);
+makan(ci1,cj1);
+makan(ci2,cj2);
+makanrafigh(ri,rj);
+speed:=10000;
+sorat:=0;
+k:=readkey;
+dandeh:=1;
+had:=5;
+jadcheck:=1;
+ei1:=1;
+ej1:=56;
+ei2:=-12;
+ej2:=63;
+makan2(ei2,ej2);
+makan2(ei1,ej1);
+avazi:=0;
+ki:=-115;
+kj:=45;
+harekat:=0;
+ia4:=1;
+ja4:=28;
+bg[ia4,ja4]:=230+7*256;
+
+
+
+{^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^}
+{^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^}
+{^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^}
+{^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^}
+{^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^}
+                    {===============HALGHEH===================}
+
+
+
+matristo2;
+while ord(k)<>49 do
+begin
+ avazi:=avazi+1;
+ k:=readkey;
+  if avazi=10 then
+  begin
+  gotoxy(17,25);write('akheh ..... ta nazani dandeh 1 ke mashin ra nemiofteh');
+  end;
+ end;
+while ord(k)<>27 do
+ begin
+
+{=================================G A M E  O V E R=========================}
+ for a:= 19 to 25 do
+   for b:=1 to 80 do
+   if help[a,b]=my_help[a,b] then
+    if damage<100 then
+     damage:=damage+1;
+
+
+if damage=100 then
+   BEGIN
+    gotoxy(2,22);writeln('Damage:',damage, ' %');
+    gotoxy(41,15);writeln('YOU LOSE');
+    readln;
+    exit;
+    end;
+
+{--------------------------------------------------------------------------}
+
+
+if keypressed then k:=readkey;
+   if (ord(k)=75) then
+    if j>19 then
+   begin
+     my_makan(i,j-1);
+     my_helpp(i,j-1);
+     j:=j-1;
+     bg[22,j+5]:=0;
+     bg[23,j+5]:=0;
+     my_help[21,j+5]:=0;
+     my_help[22,j+5]:=0;
+     my_help[23,j+5]:=0;
+     my_help[24,j+5]:=0;
+     k:='0';
+   end;
+   if (ord(k)=77) then
+    if j<64 then
+   begin
+     my_makan(i,j+1);
+      my_helpp(i,j+1);
+     j:=j+1;
+     bg[22,j-1]:=0;
+     bg[23,j-1]:=0;
+     my_help[21,j-1]:=0;
+     my_help[22,j-1]:=0;
+     my_help[23,j-1]:=0;
+     my_help[24,j-1]:=0;
+     k:='0';
+   end;
+   {T O R M O Z}
+   if ord(k)=80 then
+    if speed<10000 then
+     if sorat>20 then
+    begin
+     speed:=speed+1000;
+     sorat:=sorat-20;
+     k:='0';
+    end;
+   if (ord(k)=49) then
+    if dandeh<>1 then
+     begin
+      speed:=8000;
+      sorat:=40;
+      k:='0';
+      dandeh:=1;
+     end;
+   if (ord(k)=50) then
+   begin
+    if dandeh>2 then
+    begin
+     speed:=6000;
+     sorat:=80;
+    end;
+    if dandeh<2 then
+    begin
+     speed:=speed+200;
+     sorat:=sorat+4;
+    end;
+    k:='0';
+    dandeh:=2;
+   end;
+   if (ord(k)=51) then
+   begin
+   if dandeh=4 then
+    begin
+    speed:=4000;
+    sorat:=120;
+    end;
+   if dandeh<3 then
+   begin
+    speed:=speed+200;
+    sorat:=sorat+4;
+   end;
+    k:='0';
+    dandeh:=3;
+   end;
+   if (ord(k)=52) then
+    if dandeh<>4 then
+    begin
+    speed:=speed+200;
+    sorat:=sorat+4;
+    k:='0';
+    dandeh:=4;
+   end;
+   if ci1>25 then
+     begin
+      randomize;
+      cj1:=random(15)+20;
+      ci1:=1;
+     end;
+   if ci2>25 then
+     begin
+      randomize;
+      cj2:=random(15)+20;
+      ci2:=1;
+     end;
+   if ei1>25 then
+    begin
+      randomize;
+      ej1:=random(15)+48;
+      ei1:=1;
+     end;
+    if ei2>28 then
+    begin
+      randomize;
+      ej2:=random(15)+48;
+      ei2:=1;
+     end;
+     if ki>300 then
+    begin
+      randomize;
+      kj:=random(15)+44;
+      ki:=-8;
+     end;
+    if ia4>100 then
+    begin
+     randomize;
+     ja4:=random(30)+25;
+     ia4:=1
+    end;
+
+ {========================EZAFAT===========================================}
+   if (ord(k)=104) then
+   begin
+   sound(130);
+   delay(5000);
+   nosound;
+   k:='0';
+      end;
+
+   if (ord(k)=32) then
+    begin
+    speed:=10000;
+    sorat:=0;
+    bg[25,j]:=177+7*256;
+    bg[25,j+4]:=177+7*256;
+    bg[24,j]:=177+7*256;
+    bg[24,j+4]:=177+7*256;
+    k:='0';
+    end;
+
+
+   if (ord(k)=119) then
+    begin
+     bg[24,j+2]:=250+135*256;
+     bg[24,j+4]:=250+7*256;
+    end;
+   if (ord(k)=101) then
+    begin
+     bg[24,j+4]:=250+135*256;
+     bg[24,j+2]:=250+7*256;
+     end;
+   if (ord(k)=116) then
+    begin
+     bg[24,j+2]:=250+135*256;
+     bg[24,j+4]:=250+135*256;
+     end;
+
+
+
+
+
+{================================HOOSH MASNOOE==============================}
+{===========================================================================}
+{===========================================================================}
+{===========================================================================}
+{===========================================================================}
+if help [17,rj+2]=1 then
+ begin
+  if help[17,rj+1]=2 then begin
+  harekat:=1;
+  komak:=3
+  end;
+  if help[17,rj+3]=2 then begin
+  harekat:=2;
+  komak:=3;
+  end;
+  if (help[17,rj+1]=1) and (help[17,rj]=2) then  begin
+  harekat:=3;
+  komak:=4
+  end;
+  if (help[17,rj+3]=1) and (help[17,rj+4]=2) then begin
+  harekat:=4;
+  komak:=4;
+  end;
+  if (help[16,rj+3]=1) and (help[16,rj+4]=1) and
+  (help[16,rj+1]=1) and (help[16,rj]=1) then begin
+  harekat:=5;
+  komak:=3;
+  end;
+ end;
+ if (help[17,rj+4]=1) and (help[17,rj+3]=2) then harekat:=6;
+ if (help[17,rj]=1) and (help[17,rj+1]=2) then harekat:=7;
+ if (help[17,rj+4]=1) and (help[17,rj+3]=1) and (help[17,rj+2]=2) then
+ begin
+ harekat:=8;
+ komak:=2;
+ end;
+ if (help[17,rj]=1) and (help[17,rj+1]=1) and (help[17,rj+2]=2) then
+ begin
+ harekat:=9;
+ komak:=2;
+ end;
+
+
+ if harekat=6 then
+ if rj>19 then
+  begin
+     makanrafigh(ri,rj-1);
+     rj:=rj-1;
+     bg[22,rj+5]:=0;
+     bg[23,rj+5]:=0;
+     harekat:=0;
+  end;
+
+  if harekat=1 then
+   if rj>21 then
+   while komak>0 do
+    begin
+     makanrafigh(ri,rj-1);
+     rj:=rj-1;
+     bg[22,rj+5]:=0;
+     bg[23,rj+5]:=0;
+     komak:=komak-1;
+     harekat:=0;
+    end;
+
+  if harekat=3 then
+    if rj>22 then
+   while komak>0 do
+    begin
+     makanrafigh(ri,rj-1);
+     rj:=rj-1;
+     bg[22,rj+5]:=0;
+     bg[23,rj+5]:=0;
+     komak:=komak-1;
+     harekat:=0;
+    end;
+
+    if harekat=8 then
+    if rj>22 then
+   while komak>0 do
+    begin
+     makanrafigh(ri,rj-1);
+     rj:=rj-1;
+     bg[22,rj+5]:=0;
+     bg[23,rj+5]:=0;
+     komak:=komak-1;
+     harekat:=0;
+    end;
+
+  if harekat=7 then
+   if rj<64 then
+   begin
+     makanrafigh(ri,rj+1);
+     rj:=rj+1;
+     bg[22,rj-1]:=0;
+     bg[23,rj-1]:=0;
+     harekat:=0;
+     end;
+
+  if harekat=2 then
+    if rj<62 then
+     while komak>0 do
+      begin
+       makanrafigh(ri,rj+1);
+       rj:=rj+1;
+       bg[22,rj-1]:=0;
+       bg[23,rj-1]:=0;
+       komak:=komak-1;
+       harekat:=0;
+      end;
+
+   if harekat=9 then
+    if rj<62 then
+     while komak>0 do
+      begin
+       makanrafigh(ri,rj+1);
+       rj:=rj+1;
+       bg[22,rj-1]:=0;
+       bg[23,rj-1]:=0;
+       komak:=komak-1;
+       harekat:=0;
+      end;
+
+  if harekat=4 then
+    if rj<61 then
+     while komak>0 do
+       begin
+       makanrafigh(ri,rj+1);
+       rj:=rj+1;
+       bg[22,rj-1]:=0;
+       bg[23,rj-1]:=0;
+       komak:=komak-1;
+       harekat:=0;
+      end;
+
+  if harekat=5 then
+   if komak<>0 then
+    begin
+      makanrafigh(ri,rj+1);
+       rj:=rj+1;
+       bg[22,rj-1]:=0;
+       bg[23,rj-1]:=0;
+       komak:=komak-1;
+       harekat:=0;
+     end;
+
+
+{===========================================================================}
+
+     if had mod 6=0 then
+      begin
+      {khte tormoz pak kon}
+       if had mod 30=0 then
+       begin
+       for e:=16 to 68 do
+       bg[25,e]:=177+0;
+       end;
+      {--------------------}
+       if jadcheck mod 2=0 then
+        begin
+        cjadval2;
+        end;
+       if jadcheck mod 2<>0 then
+        begin
+        cjadval1;
+        end;
+   {++++++++++++++++++++++++++++++++}
+       matristo2;
+       MY_MAKAN(I,J);
+       my_helpp(i,j);
+       makanrafigh(ri,rj);
+
+       {bg[ia4,ja4]:=230+7*256;
+       help[ia4,ja4]:=3;
+       ia4:=ia4+1;
+       bg[ia4-2,ja4]:=0;
+       HELP[ia4-2,ja4]:=2;
+        if (help[i,j]=3) or (help[i,j+1]=3) or (help[i,j+2]=3) or (help[i,j+3]=3) or
+       (help[i,j+4]=3 ) then
+       if damage>10 then damage:=damage-10;}
+
+       if had mod 6=0 then
+       begin
+       makan(ci1,cj1);
+       helpp(ci1,cj1);
+       ci1:=ci1+1;
+       bg[ci1-2,cj1+1]:=0;
+       bg[ci1-2,cj1+2]:=0;
+       bg[ci1-2,cj1+3]:=0;
+       bg[ci1-2,cj1+4]:=0;
+       bg[ci1-2,cj1]:=0;
+
+       end;
+       makan(ci2,cj2);
+       helpp(ci2,cj2);
+       ci2:=ci2+1;
+       bg[ci2-2,cj2+1]:=0;
+       bg[ci2-2,cj2+2]:=0;
+       bg[ci2-2,cj2+3]:=0;
+       bg[ci2-2,cj2+4]:=0;
+       bg[ci2-2,cj2]:=0;
+
+       if had mod 12=0 then
+       begin
+       makan2(ei1,ej1);
+       helpp(ei1,ej1);
+       ei1:=ei1+1;
+       bg[ei1-2,ej1+1]:=0;
+       bg[ei1-2,ej1+3]:=0;
+
+       makan2(ei2,ej2);
+       helpp(ei2,ej2);
+       ei2:=ei2+1;
+       bg[ei2-2,ej2+1]:=0;
+       bg[ei2-2,ej2+3]:=0;
+
+       makank(ki,kj);
+       ki:=ki+1;
+       bg[ki-2,kj+1]:=0;
+       bg[ki-2,kj+2]:=0;
+       bg[ki-2,kj+5]:=0;
+       bg[ki-2,kj+4]:=0;
+
+
+       end;
+       gotoxy(2,21);writeln(sorat,' ',' km/h ');
+       gotoxy(2,23);writeln('Gear :',dandeh);
+       gotoxy(2,22);writeln('Damage:',damage, ' % ');
+
+  if rj>29 then
+   if (help[20,rj-1]=2) and (help[21,rj-1]=2) and (help[22,rj-1]=2) and
+   (help[23,rj-1]=2) and (help[24,rj-1]=2) then
+    begin
+     makanrafigh(ri,rj-1);
+     rj:=rj-1;
+     bg[22,rj+5]:=0;
+     bg[23,rj+5]:=0;
+     end;
+  if rj<29 then
+  if (help[20,rj+5]=2) and (help[21,rj+5]=2) and (help[22,rj+5]=2) and
+   (help[23,rj+5]=2) and (help[24,rj+5]=2) then
+    begin
+      makanrafigh(ri,rj+1);
+       rj:=rj+1;
+       bg[22,rj-1]:=0;
+       bg[23,rj-1]:=0;
+     end;
+
+       if speed>2000 then
+    if (dandeh=1) then
+     if speed>8000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=2) then
+     if speed>6000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=3) then
+     if speed>4000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=4) then
+     if speed>2000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+       jadcheck:=jadcheck+1;
+       if jadcheck=200 then jadcheck:=2;
+       delay(speed);
+      end;
+    had:=had+1;
+    if had=500 then had:=5;
+   END;
+
+
+
+  gotoxy(28,14);write('Do you want to exit(Y/N)?');
+   REadkey;
+    if (y_n)='y' then exit ;
+
+end.

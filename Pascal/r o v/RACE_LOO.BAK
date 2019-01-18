@@ -1,0 +1,448 @@
+uses crt;
+const
+tondi=1;
+
+var
+bg:array[1..25,1..80] of word absolute $b800:0000;
+mycar:array[1..4,1..8]of word ;
+harif:array[1..4,1..5]of word ;
+bghelp:array [1..25,1..80] of integer;
+jadval1,jadval2,line1,line2:array [1..25] of word;
+a,b,c,d,e,f,g,h,i,j,rang,jadcheck:integer;
+had,speed,slide,dandeh,rahnamachap,rahnamarast,sorat:integer;
+k:char;
+{-----------------------------PROCEDURES-------------------------------------}
+
+procedure my_makan(c,d:integer);
+begin
+   for a:=1 to 4 do
+    for b:=1 to 8 do
+   bg[a+c-1,b+d-1]:=mycar[a,b];
+   end;
+
+procedure makan(c,d:integer);
+begin
+   for a:=1 to 4 do
+    for b:=1 to 5do
+   bg[a+c-1,b+d-1]:=harif[a,b];
+   end;
+
+{procedure jakhat(c:integer);
+begin
+   for a:=1 to 125 do
+   bg[a+c-1,b+40]:=khat[a];
+   end; }
+
+procedure Game_over;
+var i,e:integer;
+begin
+if i=e+2 then exit;
+end;
+
+procedure cjadval1;
+ begin
+ for rang:=1 to 25 do
+ begin
+  bg[rang,18]:=jadval1[rang];
+  bg[rang,69]:=jadval1[rang];
+  bg[rang,44]:=line1[rang];
+  end;
+  end;
+
+procedure cjadval2;
+ begin
+ for rang:=1 to 25 do
+ begin
+  bg[rang,18]:=jadval2[rang];
+  bg[rang,69]:=jadval2[rang];
+  bg[rang,44]:=line2[rang];
+  end;
+  end;
+
+
+Procedure Knightrider(x,y,time: integer);
+Begin
+  textbackground(black);
+  Repeat
+    slide := 0;
+    textcolor(red);
+    gotoxy(x,y);
+    write('°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°');
+    Begin
+      Repeat
+        slide := slide + 1;
+        textcolor (lightred);
+        gotoxy (x + (slide-1) ,y);
+        write('°±²±°');
+        delay(time);
+        gotoxy (x + (slide-1) ,y);
+        textcolor(red);
+        write('°°°°°');
+      Until (keypressed) or (slide = 30);
+    End;
+    slide := 0;
+    Begin
+      x := x + 30;
+      Repeat
+        slide := slide + 1;
+        textcolor (lightred);
+        gotoxy (x - (slide-1) ,y);
+        write('°±²±°');
+        delay(time);
+        gotoxy (x - (slide-1) ,y);
+        textcolor(red);
+        write('°°°°°');
+      Until (keypressed) or (slide = 30);
+      x := x - slide;
+    End;
+  Until keypressed;
+  textbackground(blue);
+End;
+{
+procedure jadval;
+for i:=1 to 25 if
+ if khat[i]= }
+
+
+
+
+{==========================================================================}
+
+
+
+
+
+
+begin
+clrscr;
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=0;
+textbackground(black);
+textcolor(blue);
+textbackground(black);
+gotoxy(10,5) ;writeln('°°°°°°°       °°°°                    ');
+gotoxy(10,6) ;writeln('°°°°°°°°      °°°°                       ');
+gotoxy(10,7) ;writeln('°°°° °°°°     °°°°                     ');
+gotoxy(10,7) ;writeln('°°°°  °°°°    °°°°                       ');
+gotoxy(10,8) ;writeln('°°°°   °°°°   °°°°     ');
+gotoxy(10,9) ;writeln('°°°°    °°°°  °°°° ');
+gotoxy(10,10);writeln('°°°°     °°°° °°°° ');
+gotoxy(10,11);writeln('°°°°      °°°°°°°°    ');
+gotoxy(10,12);writeln('°°°°       °°°°°°°   ');
+textcolor(white);
+gotoxy(35,17);writeln('Press Enter');
+Knightrider(24,20,1000);
+readkey;
+gotoxy(1,1);
+
+
+
+
+
+
+
+
+
+
+for i:=1 to 25 do
+  for j:=1 to 80 do
+ bg[i,j]:=219+7*256;
+
+ for i:=1 to 25 do
+  for j:=16 to 70 do
+   bg[i,j]:=0;
+
+ {for j:=1 to 25 do
+  BEGIN
+   bg[J,18]:=178+7*256;
+   bg[J,69]:=178+7*256;
+  END;}
+  j:=1;
+  while j<26 do
+   begin
+    jadval1[J]:=178+7*256;
+    j:=j+2;
+   end;
+  j:=2;
+  while j<25 do
+   begin
+    jadval1[j]:=127+0;
+    j:=j+2;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    jadval2[J]:=178+0;
+    j:=j+2;
+   end;
+  j:=2;
+  while j<25 do
+   begin
+    jadval2[j]:=178+7*256;
+    j:=j+2;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    line1[J]:=176+0;
+    j:=j+1;
+    line1[j]:=176+0;
+    j:=j+3;
+   end;
+  j:=3;
+  while j<25 do
+   begin
+    line1[j]:=176+7*256;
+    j:=j+1;
+    line1[j]:=176+7*256;
+    j:=j+3;
+   end;
+
+   j:=1;
+  while j<26 do
+   begin
+    line2[J]:=176+7*256;
+    j:=j+1;
+    line2[j]:=176+7*256;
+    j:=j+3;
+   end;
+  j:=3;
+  while j<25 do
+   begin
+    line2[j]:=176+0;
+    j:=j+1;
+    line2[j]:=176+0;
+    j:=j+3;
+   end;
+
+
+
+
+
+
+
+   cJadval2;
+
+textcolor(red);
+textbackground(white);
+  gotoxy(1,21);writeln('ÉÍÍÍÍÍÍÍÍÍÍÍÍ»');
+  gotoxy(1,22);writeln('º            º');
+  gotoxy(1,23);writeln('º            º');
+  gotoxy(1,24);writeln('ÈÍÍÍÍÍÍÍÍÍÍÍÍ¼');
+  gotoxy(2,22);writeln('0',' ',' km/h ');
+  gotoxy(2,23);writeln('Gear :','N');
+
+
+{---------------------------------MY CAR------------------------------------}
+{for i:=1 to 3 do
+  for j:=1 to 8 do
+  mycar[i,j]:=219+2*256;;}
+rahnamarast:=7;
+rahnamachap:=7;
+
+for i:=2 to 3 do
+  for j:=3 to 5 do
+  mycar[i,j]:=219+20*256;
+  mycar[2,2]:=40+7*256;
+  mycar[3,2]:=40+7*256;
+  mycar[2,6]:=41+7*256;
+  mycar[3,6]:=41+7*256;
+  mycar[1,5]:=31+4*256;
+  mycar[1,3]:=31+4*256;
+  mycar[4,3]:=250+rahnamarast*256;
+  mycar[4,5]:=250+rahnamachap*256;
+
+{-----------------------------------Harif-----------------------------------}
+
+for i:=2 to 3 do
+  for j:=2 to 4 do
+  harif[i,j]:=219+15*256;
+  harif[2,1]:=40+5*256;
+  harif[3,1]:=40+5*256;
+  harif[2,5]:=41+5*256;
+  harif[3,5]:=41+5*256;
+  harif[4,4]:=30+5*256;
+  harif[4,2]:=30+5*256;
+
+{----------------------------------------------------------------------------}
+
+
+
+
+
+
+
+i:=21;
+j:=48;
+e:=-3;
+randomize;
+f:=random(15)+20;
+g:=-15;
+h:=random(15)+20;
+my_makan(i,j);
+makan(e,f);
+makan(g,h);
+speed:=10000;
+sorat:=0;
+k:=readkey;
+dandeh:=1;
+had:=5;
+jadcheck:=1;
+
+
+
+
+
+
+
+
+
+if ord(k)=49 then
+while ord(k)<>27 do
+ begin
+   {if i=e+2 then
+   if j=f then  exit;}
+   game_over;
+   if keypressed then k:=readkey;
+   {if ord(k)=0  then k:=readkey;}
+   if (ord(k)=75) then
+    if j>18 then
+   begin
+     my_makan(i,j-tondi);
+     j:=j-tondi;
+     k:='0';
+   end;
+   if (ord(k)=77) then
+    if j<63 then
+   begin
+     my_makan(i,j+tondi);
+     j:=j+tondi;
+     k:='0';
+   end;
+   {T O R M O Z}
+   if ord(k)=80 then
+    if speed<10000 then
+    begin
+     speed:=speed+2000;
+     sorat:=sorat-40;
+     k:='0';
+    end;
+   if (ord(k)=49) then
+    if dandeh<>1 then
+     begin
+      speed:=8000;
+      sorat:=40;
+      k:='0';
+      dandeh:=1;
+     end;
+   if (ord(k)=50) then
+   begin
+    if dandeh>2 then
+    begin
+     speed:=6000;
+     sorat:=80;
+    end;
+    if dandeh<2 then
+    begin
+     speed:=speed+200;
+     sorat:=sorat+4;
+    end;
+    k:='0';
+    dandeh:=2;
+   end;
+   if (ord(k)=51) then
+   begin
+   if dandeh=4 then
+    begin
+    speed:=4000;
+    sorat:=120;
+    end;
+   if dandeh<3 then
+   begin
+    speed:=speed+200;
+    sorat:=sorat+4;
+   end;
+    k:='0';
+    dandeh:=3;
+   end;
+   if (ord(k)=52) then
+    if dandeh<>4 then
+    begin
+    speed:=speed+200;
+    sorat:=sorat+4;
+    k:='0';
+    dandeh:=4;
+   end;
+   if e>25 then
+     begin
+      randomize;
+      f:=random(15)+20;
+      e:=1;
+     end;
+   if g>25 then
+     begin
+      randomize;
+      h:=random(15)+20;
+      g:=1;
+     end;
+   if (ord(k)=54) then
+     bg[24,j+2]:=250+135*256;
+
+     if had mod 5=0 then
+      begin
+       if jadcheck mod 2=0 then
+        begin
+        cjadval2;
+        end;
+       if jadcheck mod 2<>0 then
+        begin
+        cjadval1;
+        end;
+       makan(e,f);
+       e:=e+1;
+       makan(g,h);
+       g:=g+1;
+       gotoxy(2,22);writeln(sorat,' ',' km/h ');
+       gotoxy(2,23);writeln('Gear :',dandeh);
+       if speed>2000 then
+    if (dandeh=1) then
+     if speed>8000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=2) then
+     if speed>6000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=3) then
+     if speed>4000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+    if (dandeh=4) then
+     if speed>2000 then
+      begin
+       speed:=speed-50;
+       sorat:=sorat+1;
+      end;
+       jadcheck:=jadcheck+1;
+       if jadcheck=200 then jadcheck:=2;
+       delay(speed);
+      end;
+    had:=had+1;
+    if had=500 then had:=5;
+      {bg[c,44]:=khat[c];
+      JAKHAT(C-1);}
+
+  end;
+ {textbackground(black);}
+gotoxy(28,14);write('do you want to exit(Y/N)?');
+READLN;
+end.
